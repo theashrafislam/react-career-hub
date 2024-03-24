@@ -24,9 +24,6 @@ const router = createBrowserRouter([
         path: "/applied",
         element: <AppliedJobs></AppliedJobs>
       },
-      {
-
-      }
     ]
   },
 ]);
