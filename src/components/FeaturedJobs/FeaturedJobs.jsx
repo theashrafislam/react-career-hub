@@ -4,10 +4,11 @@ import { json } from "react-router-dom";
 
 const FeaturedJobs = () => {
     const [jobs, setJobs] = useState([]);
+    const [dataLength, setDataLength] = useState(4);
     useEffect(() => {
         fetch('jobs.json')
-        .then(res => res.json())
-        .then(data => setJobs(data))
+            .then(res => res.json())
+            .then(data => setJobs(data))
     }, [])
     return (
         <div>
@@ -17,8 +18,13 @@ const FeaturedJobs = () => {
             </div>
             <div className="grid grid-cols-2 gap-6">
                 {
-                    jobs.map(job => <Job key={job.id} job={job}></Job>)
+                    jobs.slice(0, dataLength).map(job => <Job key={job.id} job={job}></Job>)
                 }
+            </div>
+            <div className={dataLength === jobs.length && "hidden"}>
+                <div className="flex justify-center items-center py-4">
+                    <button onClick={() => setDataLength(jobs.length)} className="btn btn-primary">Show All Jobs</button>
+                </div>
             </div>
         </div>
     );
